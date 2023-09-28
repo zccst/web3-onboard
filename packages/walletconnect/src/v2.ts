@@ -188,6 +188,7 @@ function walletConnect(options: WalletConnectOptions): WalletInit {
                   const hexChainId = isHexString(chainId)
                     ? chainId
                     : `0x${chainId.toString(16)}`
+                    console.log('chainChanged', hexChainId)
                   this.emit('chainChanged', hexChainId)
                 },
                 error: console.warn
@@ -307,7 +308,7 @@ function walletConnect(options: WalletConnectOptions): WalletInit {
                   message: `The Provider does not support the requested method: ${method}`
                 })
               }
-
+console.log('method', method)
               if (method == 'wallet_switchEthereumChain') {
                 if (!params) {
                   throw new ProviderRpcError({
@@ -325,6 +326,7 @@ function walletConnect(options: WalletConnectOptions): WalletInit {
                     message: `The Provider requires a chainId to be passed in as an argument`
                   })
                 }
+                console.log(chainIdObj.chainId)
                 return this.connector.request({
                   method: 'wallet_switchEthereumChain',
                   params: [
